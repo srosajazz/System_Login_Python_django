@@ -46,4 +46,15 @@ class ControllerRegister():
             return 3
 
 
-print(ControllerRegister.register('Sergio', 'scarlosjazz2@gmail.com', 'sergio123456'))
+class ControllerLogin():
+    @classmethod
+    def login(cls, email, password):
+        session = return_session()
+        password = hashlib.sha256(password.encode()).hexdigest()
+        logged = session.query(Person).filter(Person.email == email).filter(Person.password == password).all()
+        if len(logged) == 1:
+            return {'logged': True, 'id': logged[0].id}
+        else:
+            return False
+
+# print(ControllerRegister.register('john','joh@gmail.com','mypassword'))
